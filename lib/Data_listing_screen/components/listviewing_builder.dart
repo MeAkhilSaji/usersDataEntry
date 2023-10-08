@@ -8,6 +8,8 @@ class UsersListingBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     UserListingCubit userDetailsCubit =
         BlocProvider.of<UserListingCubit>(context);
+    print(userDetailsCubit.hasReachedMax);
+
     return ListView.builder(
       controller: scrollController,
       itemCount: userDetailsCubit.userList!.length +

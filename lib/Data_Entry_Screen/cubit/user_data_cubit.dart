@@ -93,7 +93,7 @@ class UserDataCubit extends Cubit<UserDataState> {
       CommonAlert.showAlertDialog(context, "please add data properly");
       return;
     }
-    await UserDataQueries.insertUser(userData, db.database);
+    await UserDataQueries.insertUser(userData, db);
     usernameController.text = "";
     selectedCountries = [];
     selectedGender = '';
@@ -102,5 +102,10 @@ class UserDataCubit extends Cubit<UserDataState> {
     // ignore: use_build_context_synchronously
     CommonAlert.showAlertDialog(context, "Data Added Successfully");
     emit(UserDataLoaded(null));
+  }
+
+  deleteTb() async {
+    Database db = await DatabaseHelper.instance.database;
+    await UserDataQueries.clearDatabase("users", db);
   }
 }

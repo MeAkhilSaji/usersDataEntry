@@ -42,6 +42,7 @@ class _UserDataListFrameState extends State<UserDataListFrame> {
     _scrollController.addListener(() {
       if (_scrollController.offset ==
           _scrollController.position.maxScrollExtent) {
+        BlocProvider.of<UserListingCubit>(context).hasReachedMax = false;
         BlocProvider.of<UserListingCubit>(context).loadUsers();
       }
     });

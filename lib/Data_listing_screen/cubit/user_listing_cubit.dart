@@ -14,7 +14,7 @@ class UserListingCubit extends Cubit<UserListingState> {
   }
   final TextEditingController searchController = TextEditingController();
   int currentPage = 1;
-  bool hasReachedMax = false;
+  bool hasReachedMax = true;
   int pageSize = 10;
   List<User> userList = [];
   void loadUsers() async {
@@ -25,7 +25,6 @@ class UserListingCubit extends Cubit<UserListingState> {
     if (users.isEmpty) {
       hasReachedMax = true;
     } else {
-      hasReachedMax = false;
       userList.addAll(users);
       currentPage++;
     }
@@ -34,8 +33,10 @@ class UserListingCubit extends Cubit<UserListingState> {
   }
 
   void searchUsers() async {
+    print("hh");
     Database db = await DatabaseHelper.instance.database;
     final users = await UserDataQueries.searchUsers(searchController.text, db);
+    print(users);
     userList = [];
     userList.addAll(users);
     emit(UserListingLoaded(userList: users));
