@@ -103,9 +103,4 @@ class UserDataCubit extends Cubit<UserDataState> {
     CommonAlert.showAlertDialog(context, "Data Added Successfully");
     emit(UserDataLoaded(null));
   }
-
-  deleteTb() async {
-    Database db = await DatabaseHelper.instance.database;
-    await UserDataQueries.clearDatabase("users", db);
-  }
 }
